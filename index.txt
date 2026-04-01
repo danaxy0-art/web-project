@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login & Sign Up</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container" id="main-container">
+
+<input type="checkbox" id="toggle">
+
+<!-- LOGIN -->
+<div class="form-box login">
+<h2>Login</h2>
+<input type="text" id="login-username" placeholder="Username" required>
+<input type="password" placeholder="Password" required>
+<button id="loginBtn">Login</button>
+<p>
+Don't have an account?
+<label for="toggle">Sign Up</label>
+</p>
+</div>
+
+<!-- SIGN UP -->
+<div class="form-box signup">
+<h2>Sign Up</h2>
+<input type="text" id="reg-username" placeholder="Username" required>
+<input type="email" placeholder="Email" required>
+<input type="tel" placeholder="Phone Number" required>
+<input type="password" placeholder="Password" required>
+<button id="registerBtn">Register</button>
+<p>
+Already have an account?
+<label for="toggle">Login</label>
+</p>
+</div>
+
+<!-- BLUE SIDE -->
+<div class="side">
+<div class="text login-text">
+<h2>WELCOME BACK!</h2>
+<p>We are happy to see you again.</p>
+</div>
+<div class="text signup-text">
+<h2>HELLO FRIEND!</h2>
+<p>Create your account and start your journey.</p>
+</div>
+</div>
+
+</div>
+
+<script>
+// عند الضغط على Login
+document.getElementById('loginBtn').addEventListener('click', function(){
+    const username = document.getElementById('login-username').value || "User";
+    const container = document.getElementById('main-container');
+    container.innerHTML = `
+        <div class="success-page">
+            <h1>Welcome, ${username}!</h1>
+            <p>You have successfully logged in.</p>
+        </div>
+    `;
+});
+
+// عند الضغط على Register
+document.getElementById('registerBtn').addEventListener('click', function(){
+    const container = document.getElementById('main-container');
+    container.innerHTML = `
+        <div class="success-page">
+          <h1>Registration Successful!</h1>
+        <p>You will be redirected back to the registration page...</p>
+        </div>
+    `;
+    // إعادة عرض صفحة التسجيل بعد ثانيتين
+    setTimeout(function(){
+        location.reload(); // يعيد تحميل الصفحة لإظهار نموذج التسجيل من جديد
+    },2000);
+});
+</script>
+
+</body>
+</html>
