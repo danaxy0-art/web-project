@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STUDU SYNC</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#f5f5f5,#ffffff);
+    color: #333;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* القائمة الجانبية */
+.sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px; /* مخفية بالبداية */
+    height: 100%;
+    background: linear-gradient(135deg,#ffffff,#e0e5f2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+    transition: left 0.3s ease;
+    z-index: 1001;
+}
+
+/* زر إغلاق القائمة أعلى القائمة */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 26px;
+    background:#e0e5f2;
+    border: none;
+    cursor: pointer;
+}
+
+.sidebar img.profile {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #1e3f7f;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.sidebar button {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg,#1e3f7f,#6190E8);
+    color: #fff;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.sidebar button:hover {
+    transform: translateX(5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.logout-btn {
+    margin-top: auto;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg,#862828,#f05151);
+    text-align: center;
+}
+
+/* المحتوى الرئيسي */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* الهيدر */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #1e3f7f;
+}
+
+.header img.logo {
+    position: absolute;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+}
+
+/* زر فتح القائمة */
+.toggle-btn {
+    position: absolute;
+    left: 20px;
+    font-size: 26px;
+    background: none;
+    border: none;
+    color: #1e3f7f;
+    cursor: pointer;
+}
+
+/* hero section */
+.hero {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(120deg,#ff9f43,#ff6b6b,#1e3f7f);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    color: white;
+}
+
+@keyframes gradientBG {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
+}
+
+.hero h2 { font-size: 48px; margin-bottom: 20px; }
+.hero p { font-size: 20px; max-width: 600px; margin-bottom: 30px; }
+.hero button {
+    padding: 15px 30px; font-size: 18px;
+    border: none; border-radius: 25px;
+    background-color: #fffc; color: #1e3f7f;
+    cursor: pointer; transition: 0.3s;
+}
+.hero button:hover { background-color: #fff; transform: scale(1.05); }
+
+.section { padding: 80px 20px; text-align: center; }
+.section h3 { font-size: 32px; margin-bottom: 40px; color: #1e3f7f; }
+.cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+.card {
+    background-color: #fff; padding: 30px; border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    max-width: 300px; flex: 1; transition: 0.4s;
+}
+.card:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.25); }
+
+footer {
+    background-color: #333; color: white; text-align: center;
+    padding: 30px 20px; font-size: 14px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <img src="c:\Users\danam\Desktop\web project\download.png" class="profile" alt="Profile" onclick="goProfile()">
+        <div class="menu-buttons">
+            <button onclick="goOption1()">Dash board</button>
+            <button onclick="goOption2()">My courses</button>
+            <button onclick="goOption3()">Add dead line</button>
+            <button onclick="goOption4()">Week plan</button>
+            <button onclick="goOption5()">Static</button>
+        </div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+            <h1>STUDU SYNC</h1>
+            <img src="c:\Users\danam\Downloads\Screenshot_2026-03-03_213510-removebg-preview.png" class="logo" alt="Logo">
+        </div>
+
+        <section class="hero">
+            <h2>Welcome!</h2>
+            <p>نظم وقتك ودروسك بسهولة مع لوحة التحكم المتقدمة والخدمات التعليمية.</p>
+            <button onclick="alert('ابدأ الآن!')">ابدأ الآن</button>
+        </section>
+
+        <section class="section">
+            <h3>خدماتنا</h3>
+            <div class="cards">
+                <div class="card">تنظيم الدروس والمواعيد</div>
+                <div class="card">متابعة الدورات والمهام</div>
+                <div class="card">خطط أسبوعية مرنة</div>
+            </div>
+        </section>
+
+        <footer>
+            حقوق النشر &copy; 2026 STUDU SYNC
+        </footer>
+    </div>
+</div>
+
+<script>
+function logout(){ localStorage.removeItem("user"); window.location.href = "index.html"; }
+function goProfile(){ window.location.href = "profile.html"; }
+function goOption1(){ alert("Go to Dash board"); }
+function goOption2(){ alert("Go to My courses"); }
+function goOption3(){ alert("Go to Add dead line"); }
+function goOption4(){ alert("Go to Week plan"); }
+function goOption5(){ alert("Go to Static"); }
+
+function toggleSidebar(){
+    const sidebar = document.getElementById('sidebar');
+    if(sidebar.style.left === "0px"){
+        sidebar.style.left = "-250px";
+    } else {
+        sidebar.style.left = "0px";
+    }
+}
+</script>
+
+</body>
+</html>
